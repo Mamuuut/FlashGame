@@ -1,0 +1,60 @@
+﻿package com.assetviews
+{
+	import flash.events.Event;
+
+	/**
+	 * BitmapAnimation
+	 * @author mamutdelaunay
+	 */
+	public class BitmapAnimation extends BitmapView implements IAnimation
+	{
+		protected var _nbLoop : int;
+		protected var _currentFrame : BitmapFrame;
+		protected var _animation : String;
+		protected var _animationIndex : int;
+		protected var _frameIndex : int;
+		protected var _spriteSheet : SpriteSheet;
+
+		public function get animationNames () : Array;
+
+		/**
+		 * Constructor
+		 * @param	clip
+		 */
+		public function BitmapAnimation (spriteSheet:SpriteSheet, repeat:Boolean=false);
+
+		/**
+		 *
+		 * @param	animationName
+		 * @return true if the object has an animation called animationName
+		 */
+		public function hasAnimation (animationName:String) : Boolean;
+
+		/**
+		 * Play an animation
+		 * @param	animation
+		 * @param 	nbLoop
+		 */
+		public function playAnimation (animation:String, nbLoop:int=-1) : void;
+
+		/**
+		 * Stop the current animation
+		 */
+		public function stopAnimation () : void;
+
+		/**
+		 * enterFrame event handler
+		 */
+		protected function onEnterFrame (event:Event) : void;
+
+		/**
+		 * loop animation if needed
+		 */
+		protected function loop () : Boolean;
+
+		/**
+		 * Update animation
+		 */
+		protected function updateAnimation () : void;
+	}
+}

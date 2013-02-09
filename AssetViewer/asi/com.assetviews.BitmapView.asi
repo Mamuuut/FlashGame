@@ -1,0 +1,42 @@
+﻿package com.assetviews
+{
+	import flash.display.Bitmap;
+	import flash.display.BitmapData;
+	import flash.display.Sprite;
+
+	/**
+	 * BitmapView
+	 * @author mamutdelaunay
+	 */
+	public class BitmapView extends ObjectView
+	{
+		protected var _bitmapData : BitmapData;
+		protected var _repeat : Boolean;
+
+		public function get width () : int;
+
+		public function get height () : int;
+
+		public function set width (width:int) : void;
+
+		public function set height (height:int) : void;
+
+		/**
+		 *
+		 * @return the _displayObject as a Sprite
+		 */
+		public function get sprite () : Sprite;
+
+		/**
+		 * Constructor
+		 * @param	bitmapData
+		 * @param	fillMode
+		 */
+		public function BitmapView (bitmapData:BitmapData, repeat:Boolean=false);
+
+		/**
+		 * Draw the bitmapData in the sprite graphics
+		 */
+		protected function draw () : void;
+	}
+}

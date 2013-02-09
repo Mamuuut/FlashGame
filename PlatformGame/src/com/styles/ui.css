@@ -1,0 +1,17 @@
+/* CSS file */
+@namespace s "library://ns.adobe.com/flex/spark";
+@namespace mx "library://ns.adobe.com/flex/mx";
+
+global {
+    font-size: 30;
+}
+
+s|Label {
+    color: #FFFFFF;
+}
+
+s|Button {
+	upColor: #FFFFFF;
+	overColor: #FFFFFF;
+	downColor: #000000;
+}

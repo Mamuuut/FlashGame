@@ -1,0 +1,27 @@
+﻿package com.pinocchio
+{
+	import com.assetviews.SpriteSheet;
+	import com.pinocchio.BeatleHead;
+
+	/**
+	 * AssetsDef is the list of the asset definitions
+	 * @author mamutdelaunay
+	 */
+	public class AssetsDef
+	{
+		private static const player : Class;
+		private static const dwarf : Class;
+		private static const snow_white : Class;
+		private static const pick_axe : Class;
+		private static const fire : Class;
+		private static const lava : Class;
+		private static const elevator : Class;
+		private static const ground_edge : Class;
+		private static const ground_repeat : Class;
+		private static const level_end : Class;
+		private static const wall : Class;
+		private static const level_back : Class;
+		public static const ANIMATIONS : Object;
+		public static const SPRITES : Object;
+	}
+}

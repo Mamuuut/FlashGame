@@ -1,0 +1,65 @@
+﻿package com.assetviews
+{
+	import flash.display.MovieClip;
+	import flash.events.Event;
+
+	/**
+	 * MovieClipAnimation
+	 * @author mamutdelaunay
+	 */
+	public class MovieClipAnimation extends ObjectView implements IAnimation
+	{
+		protected var _movieClipWidth : int;
+		protected var _movieClipHeight : int;
+		protected var _animation : Array;
+		protected var _nbLoop : int;
+
+		public function get animationNames () : Array;
+
+		public function get width () : int;
+
+		public function get height () : int;
+
+		/**
+		 *
+		 * @return the _displayObject as a MovieClip
+		 */
+		public function get movieClip () : MovieClip;
+
+		/**
+		 * Constructor
+		 * @param	clip
+		 */
+		public function MovieClipAnimation (clip:MovieClip, animations:Array);
+
+		/**
+		 * Play an animation
+		 * @param	animation
+		 * @param 	nbLoop
+		 */
+		public function playAnimation (animation:String, nbLoop:int=-1) : void;
+
+		/**
+		 * Stop the current animation
+		 */
+		public function stopAnimation () : void;
+
+		/**
+		 *
+		 * @param	animationName
+		 * @return true if the object has an animation called animationName
+		 */
+		public function hasAnimation (animationName:String) : Boolean;
+
+		/**
+		 * loop event listener
+		 * @param	event
+		 */
+		protected function onLoop (event:Event) : void;
+
+		/**
+		 * update the view according to the xFlip and yFlip properties
+		 */
+		protected function updateView () : void;
+	}
+}

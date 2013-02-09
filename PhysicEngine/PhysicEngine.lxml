@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SWCProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <FlexBinPath>C:\Documents and Settings\mamut\MamutGame\FlashGame\PlatformGame\lib\PhysicEngine.swc</FlexBinPath>
+  <FlashBinPath>.\bin\PhysicEngine.flash.swc</FlashBinPath>
+  <FlexIncludeASI>false</FlexIncludeASI>
+  <MakeCS3>false</MakeCS3>
+  <MakeMXI>false</MakeMXI>
+  <IntegrateAsDoc>true</IntegrateAsDoc>
+  <LaunchAEM>false</LaunchAEM>
+  <MXIVersion />
+  <MXPIncludeASI>false</MXPIncludeASI>
+  <MXIAuthor />
+  <MXIDescription />
+  <MXIUIAccessText />
+  <Flex_IgnoreClasses>
+    <string>src\physictest\view\vector2dinput.mxml</string>
+    <string>src\physictest\view\quadview.mxml</string>
+    <string>src\physictest\view\physicsettings.mxml</string>
+    <string>src\physictest\view\objectsettings.mxml</string>
+    <string>src\physictest\view\numberinput.mxml</string>
+    <string>src\physictest\view\levelview.mxml</string>
+    <string>src\physictest\skins\levelbuttonskin.mxml</string>
+    <string>src\physictest\skins\settingsbuttonskin.mxml</string>
+    <string>src\physictest\skins\settingspanelskin.mxml</string>
+    <string>src\physictest\level\view\objectview.mxml</string>
+    <string>src\physictest\level\model\levels.as</string>
+    <string>src\physictest\level\factory\levelobjectfactory.as</string>
+    <string>src\physictest\level\controller\levelobject.as</string>
+    <string>src\physictest\level\controller\levelcontoller.as</string>
+    <string>src\physictest\events\levelevent.as</string>
+    <string>src\physictest\events\objectsettingsevent.as</string>
+    <string>src\physictest\events\physicsettingsevent.as</string>
+    <string>src\physictest\controller\physictestcontroller.as</string>
+    <string>src\physictest\physictest.mxml</string>
+  </Flex_IgnoreClasses>
+  <CS3_IgnoreClasses />
+  <CS3_ComponentClass />
+  <CS3_ComponentName />
+  <CS3_ComponentGroup />
+  <CS3_ComponentToolTip />
+  <CS3_ComponentIconFile />
+  <CS3_PreviewType>None</CS3_PreviewType>
+  <CS3_PreviewResource />
+</SWCProject>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:SparkSkin 
+	xmlns:fx="http://ns.adobe.com/mxml/2009"
+	xmlns:s="library://ns.adobe.com/flex/spark">
+	
+<!--
+	The settings skin class for the Spark Panel component.  
+	@see spark.components.Panel
+    @author mamutdelaunay
+-->
+    <fx:Metadata>
+        [HostComponent("spark.components.Panel")]
+    </fx:Metadata> 
+    
+	<!-- states -->
+    <s:states>
+        <s:State name="normal" />
+        <s:State name="disabled" />
+        <s:State name="normalWithControlBar" stateGroups="withControls" />
+        <s:State name="disabledWithControlBar" stateGroups="withControls" />
+    </s:states>
+	
+	<s:Group width="100%" height="100%">
+		<s:Rect width="100%" height="100%">
+			<s:fill>
+				<s:SolidColor color="#FF8800" />
+			</s:fill>
+		</s:Rect>
+		
+		<!-- panel borders -->
+		<s:VGroup left="1" top="1" right="1" bottom="1" gap="0">
+			
+			<!-- title bar -->
+			<s:Group width="100%">
+				<!-- title bar background -->
+				<s:Rect width="100%" height="100%">
+					<s:fill>
+						<s:SolidColor color="#FF8800" />
+					</s:fill>
+				</s:Rect>
+				<!-- title label -->
+                <s:Label 
+					id="titleDisplay" maxDisplayedLines="1"
+                    left="4" right="4" top="4" bottom="4"
+                    verticalAlign="middle" textAlign="start" 
+					fontWeight="bold" fontSize="16" color="0x000000">
+                </s:Label>
+			</s:Group>
+			
+			<!-- content -->
+			<s:Group width="100%" height="100%">
+				<!-- content background -->
+				<s:Rect width="100%" height="100%">
+					<s:fill>
+						<s:SolidColor color="0x000000" />
+					</s:fill>
+				</s:Rect>
+				<!-- content vertical layout -->
+				<s:VGroup 
+					id="contentGroup" 
+					width="100%" height="100%" 
+					minWidth="0" minHeight="0"
+					gap="8"
+					paddingBottom="8" paddingLeft="8" paddingRight="8" paddingTop="8">
+				</s:VGroup>
+			</s:Group>
+		</s:VGroup>
+	</s:Group>
+	
+</s:SparkSkin>

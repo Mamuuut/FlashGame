@@ -1,0 +1,50 @@
+﻿package com.assets
+{
+	import flash.display.Bitmap;
+	import flash.display.BitmapData;
+	import flash.geom.Point;
+	import flash.geom.Rectangle;
+	import flash.utils.Dictionary;
+
+	/**
+	 * SpriteSheet
+	 * @author mamutdelaunay
+	 */
+	public class SpriteSheet
+	{
+		protected var _bitmap : Bitmap;
+		protected var _animations : Dictionary;
+		protected var _animationNames : Array;
+
+		public function get animationNames () : Array;
+
+		/**
+		 * Constructor
+		 * @param	bitmap
+		 */
+		public function SpriteSheet (bitmap:Bitmap, animations:Array);
+
+		public function getNbFrames (animation:String) : int;
+
+		/**
+		 *
+		 * @param	index
+		 * @return
+		 */
+		public function getBitmapData (animation:String, index:int) : BitmapData;
+
+		/**
+		 *
+		 * @param	animation
+		 * @param	index
+		 * @return the animation frame period
+		 */
+		public function getFrame (animation:String, index:int) : BitmapFrame;
+
+		/**
+		 *
+		 * @param	animations
+		 */
+		protected function initializeAnimations (animations:Array) : void;
+	}
+}

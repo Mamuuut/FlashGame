@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009"
+			   xmlns:s="library://ns.adobe.com/flex/spark"
+			   xmlns:mx="library://ns.adobe.com/flex/mx"
+               xmlns:view="physictest.view.*"
+			   creationComplete="onCreationComplete()"
+			   enterFrame="onEnterFrame()">
+    
+	<fx:Style source="styles/ui.css"/>
+
+	<fx:Script>
+		<![CDATA[
+			import physic.controller.PhysicController;
+			import physic.model.ObjectModel;
+			import physictest.controller.PhysicTestController;
+			
+			protected function onCreationComplete():void
+			{	
+				_controller = new PhysicTestController(levelView, physicSettings, objectSettings);
+			}
+			
+			protected function onEnterFrame():void
+			{
+				/* MemoryLeak Test */
+				/*
+				var objectA:ObjectModel = new ObjectModel(0, 0, 20, 20);
+				var objectB:ObjectModel = new ObjectModel(100, 100, 20, 20);
+				physicController.addObject(objectA);
+				physicController.addObject(objectB);
+				
+				physicController.updatePhysic();
+				
+				physicController.clear();
+				
+				objectA.dispose();
+				objectB.dispose();
+				*/
+			}
+			
+			protected var physicController:PhysicController = new PhysicController(200, 200);
+				
+			
+			[Bindable]
+			protected var _controller:PhysicTestController;
+		]]>
+	</fx:Script>
+
+	<s:BorderContainer 
+		id="physicTestView"
+		width="100%" height="100%">
+		<s:HGroup
+			gap="0"
+			width="100%" height="100%">
+			<s:VGroup width="200" height="100%" gap="0">
+				<view:PhysicSettings id="physicSettings" width="100%" />
+				<view:ObjectSettings id="objectSettings" width="100%" height="100%"/>
+			</s:VGroup>
+			<s:VGroup width="100%" height="100%" gap="0">
+				<view:LevelView id="levelView" width="100%" height="100%"/>
+				
+				<s:Panel title="Level Controls" width="100%" height="150" skinClass="physictest.skins.SettingsPanelSkin">
+					<s:HGroup width="100%" height="100%" gap="8">
+						<s:VGroup height="100%" verticalAlign="bottom">
+							<s:RadioButton groupName="level" 
+										   id="gravityLevel"
+										   label="Gravity" 
+										   width="100%"
+										   selected="true"
+										   click="_controller.loadGravityLevel()" />
+							<s:RadioButton groupName="level" 
+										   id="collisionLevel"
+										   label="Collision" 
+										   width="100%"
+										   click="_controller.loadCollisionLevel()" />
+							<s:RadioButton groupName="level" 
+										   id="frictionLevel"
+										   label="Friction" 
+										   width="100%"
+										   click="_controller.loadFrictionLevel()" />
+							<!--s:RadioButton groupName="level" 
+										   id="randomShowerLevel"
+										   label="Random Shower" 
+										   width="100%"
+										   click="_controller.loadRandomShowerLevel()" /-->
+						</s:VGroup>
+						<s:VGroup height="100%" verticalAlign="bottom">
+							<s:CheckBox 
+								id="drawQuadTreeCheckbox" label="Draw QuadTree" 
+								click="{_controller.setDrawQuadTreeEnabled(drawQuadTreeCheckbox.selected)}" />
+						</s:VGroup>
+						<s:Spacer width="100%" />
+						<s:HGroup height="100%" verticalAlign="bottom">
+							<s:Button styleName="playButton" click="_controller.play()" skinClass="physictest.skins.LevelButtonSkin" enabled="{_controller.levelController.pause}" />
+							<s:Button styleName="pauseButton" click="_controller.pause()" skinClass="physictest.skins.LevelButtonSkin" enabled="{!_controller.levelController.pause}" />
+							<s:Button styleName="nextButton" click="_controller.nextFrame()" skinClass="physictest.skins.LevelButtonSkin" />
+							<s:Button styleName="stopButton" click="_controller.stop()" skinClass="physictest.skins.LevelButtonSkin" />
+						</s:HGroup>
+					</s:HGroup>
+				</s:Panel>
+				
+			</s:VGroup>
+		</s:HGroup>
+		
+	</s:BorderContainer> 
+
+</s:Application>

@@ -1,0 +1,25 @@
+﻿package com.assets
+{
+	import flash.display.DisplayObject;
+
+	/**
+	 * IObjectView
+	 * @author mamutdelaunay
+	 */
+	public interface IObjectView
+	{
+		function get displayObject () : DisplayObject;
+
+		function get width () : int;
+		function set width (width:int) : void;
+
+		function get height () : int;
+		function set height (height:int) : void;
+
+		function get x () : int;
+		function set x (x:int) : void;
+
+		function get y () : int;
+		function set y (y:int) : void;
+	}
+}

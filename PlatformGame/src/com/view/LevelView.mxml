@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+               xmlns:s="library://ns.adobe.com/flex/spark" 
+               xmlns:mx="library://ns.adobe.com/flex/halo"
+			   creationComplete="onCreationComplete()"
+			   width="100%" height="100%">
+
+    <fx:Script>
+		<![CDATA[
+			import com.assetviews.AssetManager;
+			import com.assetviews.BitmapView;
+			import com.assetviews.IAnimation;
+			import com.assetviews.IObjectView;
+			import com.objects.Player;
+			import com.pinocchio.AnimationNames;
+			import mx.core.UIComponent;
+			
+			/**
+			 * @param	player
+			 * @return The player position relative to the visible scroll view
+			 */
+			public function getViewPlayerPos(player:Player):Point
+			{
+				return new Point(player.view.x - gameGroup.horizontalScrollPosition, player.view.y - gameGroup.verticalScrollPosition);
+			}
+			
+			/**
+			 * @param	player
+			 * @return The player position relative to the level view
+			 */
+			public function getLevelPlayerPos(player:Player):Point
+			{
+				return new Point(player.view.x, player.view.y);
+			}
+			
+			/**
+			 * Initialize the levelView from its xml description
+			 * @param	xmlLevelObject
+			 */
+			public function initializeView(xmlLevelObject:Object):void
+			{
+				/* Level UIComponent */
+				_levelUiComponent = new UIComponent();
+				
+				gameLevel.width = _levelUiComponent.width = xmlLevelObject.width as Number;
+				gameLevel.height = _levelUiComponent.height = xmlLevelObject.height as Number;
+				var background:String = xmlLevelObject.background;
+				if (null != background)
+				{
+					var backgroundSprite:BitmapView = AssetManager.instance.getSprite(background);
+					backgroundSprite.width = _levelUiComponent.width;
+					backgroundSprite.height = _levelUiComponent.height;
+					_levelUiComponent.addChild(backgroundSprite.displayObject);
+				}
+				
+				gameLevel.addElement(_levelUiComponent);
+			}
+		
+			/**
+			 * 
+			 * @param	objectView
+			 */
+			public function addObjectView(objectView:Object):void
+			{
+				_levelUiComponent.addChild(objectView.displayObject);
+			}
+			
+			/**
+			 * 
+			 * @param	objectView
+			 */
+			public function removeObjectView(objectView:Object):void
+			{
+				_levelUiComponent.removeChild(objectView.displayObject);
+			}
+		
+			/**
+			 * 
+			 * @param	objectView
+			 */
+			public function clearView():void
+			{
+				gameLevel.removeAllElements();
+				if (null != _levelUiComponent)
+				{
+					while (0 != _levelUiComponent.numChildren)
+					{
+						_levelUiComponent.removeChildAt(0);	
+					}
+				}
+			}
+			
+			/**
+			 * creationComplete event handler
+			 */
+			private function onCreationComplete():void
+			{	
+				/* Foreground UIComponent */
+				var foregroundView:UIComponent = new UIComponent();
+				foregroundView.width = width;
+				foregroundView.height = height;
+				
+				/* Frame sprite */
+				var frame:IAnimation = AssetManager.instance.getAnimation("game_frame");
+				frame.playAnimation(AnimationNames.IDLE);
+				frame.x = frame.y = MARGIN;
+				frame.width = width - MARGIN * 2;
+				frame.height = height - MARGIN * 2;
+				foregroundView.addChild(frame.displayObject);
+				
+				/* BeatleHead animation */
+				var beatleClip:IAnimation = AssetManager.instance.getAnimation("beatle");
+				beatleClip.playAnimation(AnimationNames.IDLE);
+				beatleClip.x = (width - beatleClip.width) / 2;
+				foregroundView.addChild(beatleClip.displayObject);
+				
+				foreground.addElement(foregroundView);
+			}
+			
+			protected var _levelUiComponent:UIComponent;
+			
+			private static const MARGIN:int = 40;
+		]]>
+	</fx:Script>
+			   
+	<s:Scroller id="gameScroller"
+				top="{MARGIN}" left="{MARGIN}" right="{MARGIN}" bottom="{MARGIN}"
+				horizontalCenter="0" verticalCenter="0"
+				horizontalScrollPolicy="off" verticalScrollPolicy="off"
+				width="100%" height="100%">
+
+		<s:Group id="gameGroup">
+			<!--
+			<s:Rect width="100%" height="100%">
+				<s:fill>
+					<s:SolidColor id="solidColor"
+								  color="black" />
+				</s:fill>
+			</s:Rect>
+			-->
+			<s:Group id="gameLevel">
+			</s:Group>
+		</s:Group>
+
+	</s:Scroller>
+
+	<s:Group id="foreground" />
+	
+	
+</s:Group>

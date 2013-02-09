@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Panel 
+	xmlns:fx="http://ns.adobe.com/mxml/2009" 
+	xmlns:s="library://ns.adobe.com/flex/spark" 
+	xmlns:mx="library://ns.adobe.com/flex/halo"
+	xmlns:view="physictest.view.*"
+	xmlns:levelView="physictest.level.view.*"
+    title="Object settings"
+	skinClass="physictest.skins.SettingsPanelSkin">
+    
+<!--
+	The LevelObject settings view.
+	Let the user edit the LevelObject main properties.
+    @author mamutdelaunay
+-->
+
+	<fx:Script>
+		<![CDATA[
+		import physictest.level.controller.LevelObject;
+		import mx.binding.utils.BindingUtils;
+		import mx.binding.utils.ChangeWatcher;
+		import physictest.view.LevelView;
+		import physictest.level.view.ObjectView;	
+		
+		/**
+		 * Initialize the settings limit from the levelView size
+		 * @param	levelView
+		 */
+		public function initializeFromLevelView(levelView:LevelView):void {
+			positionInput.xMax = levelView.width;
+			positionInput.yMax = levelView.height;
+		}
+		
+		/**
+		 * Update the object setting from the level object
+		 */
+		public function updateFromObject(object:LevelObject):void
+		{
+			_levelObject = object;
+			
+			objectView.color = _levelObject.view.color;
+			objectView.width = _levelObject.view.width;
+			objectView.height = _levelObject.view.height;
+			
+			positionInput.value = _levelObject.model.position;
+			sizeInput.value = _levelObject.model.size;
+			velocityInput.value = _levelObject.model.velocity;
+			massInput.value = _levelObject.model.mass;
+			
+			bindProperties();
+		}
+		
+		/**
+		 * Clear the current object edited
+		 */
+		public function clearObject():void
+		{
+			_levelObject = null;
+			unbindProperties();
+		}
+		
+		/**
+		 * Apply the object setting to the level object
+		 */
+		protected function apply():void
+		{
+			_levelObject.model.position = positionInput.value;
+			_levelObject.model.size = sizeInput.value;
+			_levelObject.model.velocity = velocityInput.value;
+			_levelObject.model.mass = massInput.value;
+			_levelObject.updateView();
+		}
+		
+		/**
+		 * Bind object dynamic properties to corresponding settings values.
+		 */
+		protected function bindProperties():void 
+		{
+			unbindProperties();
+			_positionChangeWatcher = BindingUtils.bindProperty(positionInput, "value", _levelObject.model, "position");
+			_velocityChangeWatcher = BindingUtils.bindProperty(velocityInput, "value", _levelObject.model, "velocity");
+		}
+		
+		/**
+		 * Uubind object dynamic properties.
+		 */
+		protected function unbindProperties():void
+		{
+			if (null != _positionChangeWatcher)
+			{
+				_positionChangeWatcher.unwatch();
+			}
+			if (null != _velocityChangeWatcher)
+			{
+				_velocityChangeWatcher.unwatch();
+			}
+		}
+		
+		[Bindable]
+		protected var _levelObject:LevelObject;
+		protected var _positionChangeWatcher:ChangeWatcher;
+		protected var _velocityChangeWatcher:ChangeWatcher;
+		
+		]]>
+	</fx:Script>
+
+	<s:Group width="100%" height="100">
+		<s:Rect width="100%" height="100">
+			<s:stroke>
+				<s:SolidColorStroke color="0xFFFFFF" weight="1" />
+			</s:stroke>
+		</s:Rect>
+		<levelView:ObjectView 
+			id="objectView"
+			horizontalCenter="0" verticalCenter="0"
+			visible="{null != _levelObject}" />
+	</s:Group>
+	
+	<view:Vector2DInput 
+		id="positionInput"
+		title="Position"/>
+	
+	<view:Vector2DInput 
+		id="sizeInput"
+		title="Size"
+		xMin="1" yMin="1" xMax="600" yMax="600" />
+	
+	<view:Vector2DInput 
+		id="velocityInput"
+		title="Velocity"
+		xMin="-100" yMin="-100" xMax="100" yMax="100" />
+		
+	<view:NumberInput 
+		id="massInput" 
+		title="Mass"
+		stepperWidth="100"
+		min="1" max="{Number.MAX_VALUE}" />
+	
+	<s:Spacer height="2" />
+	
+	<s:Button 
+		width="100%" height="30" 
+		label="Apply" 
+		click="apply()" 
+		skinClass="physictest.skins.SettingsButtonSkin"
+		enabled="{null != _levelObject}" />
+	
+</s:Panel>

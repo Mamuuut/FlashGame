@@ -1,0 +1,42 @@
+﻿package com.assets
+{
+	import flash.display.MovieClip;
+	import flash.events.Event;
+
+	/**
+	 * MovieClipAnimation
+	 * @author mamutdelaunay
+	 */
+	public class MovieClipAnimation extends ObjectView implements IAnimation
+	{
+		protected var _animation : Array;
+		protected var _nbLoop : int;
+
+		public function get animationNames () : Array;
+
+		/**
+		 *
+		 * @return the _displayObject as a MovieClip
+		 */
+		public function get movieClip () : MovieClip;
+
+		/**
+		 * Constructor
+		 * @param	clip
+		 */
+		public function MovieClipAnimation (clip:MovieClip, animations:Array);
+
+		/**
+		 * Play an animation
+		 * @param	animation
+		 * @param 	nbLoop
+		 */
+		public function playAnimation (animation:String, nbLoop:int=-1) : void;
+
+		/**
+		 * loop event listener
+		 * @param	event
+		 */
+		protected function onLoop (event:Event) : void;
+	}
+}

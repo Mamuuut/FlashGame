@@ -1,0 +1,57 @@
+﻿package com.assetviews
+{
+	import flash.display.DisplayObject;
+	import flash.events.EventDispatcher;
+
+	/**
+	 * ObjectView
+	 * @author Mamut
+	 */
+	public class ObjectView extends EventDispatcher implements IObjectView
+	{
+		public static const LOOP_END : String = "loop_end";
+		protected var _x : int;
+		protected var _y : int;
+		protected var _width : int;
+		protected var _height : int;
+		protected var _xFlip : Boolean;
+		protected var _yFlip : Boolean;
+		protected var _displayObject : DisplayObject;
+		private static const REVERT_ANGLE : int = 180;
+
+		public function get x () : int;
+		public function set x (x:int) : void;
+
+		public function get y () : int;
+		public function set y (y:int) : void;
+
+		public function get width () : int;
+		public function set width (width:int) : void;
+
+		public function get height () : int;
+		public function set height (height:int) : void;
+
+		public function get displayObject () : DisplayObject;
+
+		public function set xFlip (xFlip:Boolean) : void;
+		public function get xFlip () : Boolean;
+
+		public function set yFlip (yFlip:Boolean) : void;
+		public function get yFlip () : Boolean;
+
+		/**
+		 * Constructor
+		 * @param	displayObject
+		 */
+		public function ObjectView (displayObject:DisplayObject);
+
+		/**
+		 *
+		 * @param	animationName
+		 * @return true if the object has an animation called animationName
+		 */
+		public function hasAnimation (animationName:String) : Boolean;
+
+		protected function updateView () : void;
+	}
+}

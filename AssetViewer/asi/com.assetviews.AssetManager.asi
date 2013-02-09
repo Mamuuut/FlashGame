@@ -1,0 +1,40 @@
+﻿package com.assetviews
+{
+	import flash.display.Bitmap;
+
+	/**
+	 * AssetManager is a Singleton
+	 * @author mamutdelaunay
+	 */
+	public final class AssetManager
+	{
+		private static var _instance : AssetManager;
+		private static var _animations : Object;
+		private static var _sprites : Object;
+
+		public static function get instance () : AssetManager;
+
+		public function AssetManager ();
+
+		/**
+		 * Initialize the AssetManager
+		 * @param	animations
+		 * @param	sprites
+		 */
+		public function initialize (animations:Object, sprites:Object) : void;
+
+		/**
+		 *
+		 * @param	name
+		 * @return An animation from its name
+		 */
+		public function getAnimation (name:String) : IAnimation;
+
+		/**
+		 *
+		 * @param	name
+		 * @return A sprite from its name
+		 */
+		public function getSprite (name:String) : BitmapView;
+	}
+}

@@ -1,0 +1,44 @@
+﻿package com.assets
+{
+	import flash.display.DisplayObject;
+	import flash.events.EventDispatcher;
+	import flash.geom.Matrix;
+
+	/**
+	 * ObjectView
+	 * @author Mamut
+	 */
+	public class ObjectView extends EventDispatcher
+	{
+		protected var _xFlip : Boolean;
+		protected var _yFlip : Boolean;
+		protected var _displayObject : DisplayObject;
+		private static const REVERT_ANGLE : int = 180;
+
+		public function get x () : int;
+		public function set x (x:int) : void;
+
+		public function get y () : int;
+		public function set y (y:int) : void;
+
+		public function get width () : int;
+		public function set width (width:int) : void;
+
+		public function get height () : int;
+		public function set height (height:int) : void;
+
+		public function get displayObject () : DisplayObject;
+
+		public function set xFlip (xFlip:Boolean) : void;
+		public function get xFlip () : Boolean;
+
+		public function set yFlip (yFlip:Boolean) : void;
+		public function get yFlip () : Boolean;
+
+		/**
+		 * Constructor
+		 * @param	displayObject
+		 */
+		public function ObjectView (displayObject:DisplayObject);
+	}
+}

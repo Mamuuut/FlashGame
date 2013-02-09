@@ -1,0 +1,46 @@
+/* CSS file */
+@namespace s "library://ns.adobe.com/flex/spark";
+@namespace mx "library://ns.adobe.com/flex/mx";
+
+s|Label {
+    color: #FFFFFF;
+    font-size: 14;
+}
+
+s|Button s|Label {
+    color: #000000;
+    font-size: 14;
+    font-weight: bold;
+}
+
+s|BorderContainer {
+	border-color: #FF8800;
+}
+
+/* Setting title style */
+.title {
+	font-weight: bold;
+}
+
+/* PhysicEngine control buttons */
+.playButton {
+	icon: Embed(source='assets/play.gif');
+}
+
+.pauseButton {
+	icon: Embed(source='assets/pause.gif');
+}
+
+.nextButton {
+	icon: Embed(source='assets/next.gif');
+}
+
+.stopButton {
+	icon: Embed(source='assets/stop.gif');
+}
+
+/* QuadTreeView */
+.quadTreeNbObject {
+	color: #FF0000;
+    font-size: 12;
+}

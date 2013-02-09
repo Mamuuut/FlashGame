@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Panel 
+	xmlns:fx="http://ns.adobe.com/mxml/2009" 
+	xmlns:s="library://ns.adobe.com/flex/spark" 
+	xmlns:mx="library://ns.adobe.com/flex/halo" 
+	xmlns:view="physictest.view.*"
+    title="Physic settings"
+	skinClass="physictest.skins.SettingsPanelSkin">
+    
+<!--
+	The PhysicEngine settings view.
+	Let the user edit the PhysicEngine gavity.
+    @author mamutdelaunay
+-->
+
+	<fx:Script>
+		<![CDATA[
+		import physictest.events.PhysicSettingsEvent;
+		import physic.controller.PhysicController;
+		import physic.model.Vector2D;
+
+		/**
+		 * gravityInput setter
+		 */
+		public function set gravity(gravity:Vector2D):void 
+		{
+			gravityInput.value = gravity;	
+		}
+		
+		/**
+		 * Dispatch a PhysicSettingsModel with edited gravity.
+		 */
+		protected function apply():void
+		{	
+			dispatchEvent(new PhysicSettingsEvent(PhysicSettingsEvent.APPLY_GRAVITY, gravityInput.value));
+		}
+			
+		]]>
+	</fx:Script>
+		
+	<view:Vector2DInput 
+		id="gravityInput"
+		title="Gravity"
+		xMin="-9" yMin="-9" stepSize="0.2"/>
+	
+	<s:Spacer height="2" />
+	
+	<s:Button width="100%" height="30" label="Apply" click="apply()" skinClass="physictest.skins.SettingsButtonSkin" />
+
+</s:Panel>

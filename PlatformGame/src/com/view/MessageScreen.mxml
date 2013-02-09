@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:BorderContainer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+				   xmlns:s="library://ns.adobe.com/flex/spark" 
+				   xmlns:mx="library://ns.adobe.com/flex/halo"
+				   backgroundColor="black"
+				   width="100%" height="100%"
+				   visible="false"
+				   borderVisible="false">
+	
+	<fx:Script>
+		<![CDATA[
+		import flash.utils.Timer;
+		import flash.events.TimerEvent;
+		
+		/**
+		 * Display a message screen during timeOut ms and then call the onEnd function.
+		 * @param	message
+		 * @param	timeOut
+		 * @param	onEnd
+		 */
+		public function setMessageScreen(message:String, timeOut:Number, onEnd:Function):void {
+			_message = message;
+			_bitmapSrc = null;
+			startTimeOut(timeOut, onEnd);
+		}
+		
+		/**
+		 * Display a bitmap screen during timeOut ms and then call the onEnd function.
+		 * @param	message
+		 * @param	timeOut
+		 * @param	onEnd
+		 */
+		public function setBitmapScreen(bitmap:Class, timeOut:Number, onEnd:Function):void {
+			_message = "";
+			_bitmapSrc = bitmap;
+			startTimeOut(timeOut, onEnd);
+		}
+		
+		/**
+		 * Start the timer
+		 * @param	timeOut
+		 * @param	onEnd
+		 */
+		private function startTimeOut(timeOut:Number, onEnd:Function):void {
+			visible = true;
+			_onEnd = onEnd;
+			_timer = new Timer(timeOut, 1);
+			_timer.addEventListener(TimerEvent.TIMER_COMPLETE, onTimerComplete, false, 0, true);
+			_timer.start();	
+		}
+		
+		/**
+		 * TimerEvent.TIMER_COMPLETE listener.
+		 * Call the _onEnd function
+		 * @param	event
+		 */
+		private function onTimerComplete(event:TimerEvent):void {
+			_timer.stop();
+			_timer.removeEventListener(TimerEvent.TIMER_COMPLETE, onTimerComplete);
+			_onEnd();
+			visible = false;
+		}
+		
+		[Bindable]
+		private var _message:String;
+		
+		[Bindable]
+		private var _bitmapSrc:Class;
+		
+		private var _timer:Timer;
+		private var _onEnd:Function;
+		]]>
+	</fx:Script>
+	
+	<s:BitmapImage source="{_bitmapSrc}"
+				   horizontalCenter="0"
+				   verticalCenter="0"/>
+	
+	<s:Label text="{_message}"
+			 color="white"
+			 fontSize="30"
+			 horizontalCenter="0"
+			 verticalCenter="0"/>
+	
+</s:BorderContainer>

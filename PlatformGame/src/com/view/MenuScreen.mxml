@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:BorderContainer xmlns:fx="http://ns.adobe.com/mxml/2009"
+				   xmlns:s="library://ns.adobe.com/flex/spark"
+				   xmlns:mx="library://ns.adobe.com/flex/halo"
+				   backgroundColor="black"
+				   width="100%"
+				   height="100%"
+				   visible="false"
+				   creationComplete="onCreationComplete()"
+				   borderVisible="false">
+
+	<fx:Script>
+		<![CDATA[
+			import com.events.GameEvent;
+			import com.level.LevelLoader;
+			import com.level.LevelModel;
+			import com.skins.GameButtonSkin;
+			import flash.events.MouseEvent;
+			import spark.components.Button;
+			
+			/**
+			 * Display the Menu screen
+			 */
+			public function show():void
+			{
+				for each (var levelModel:LevelModel in LevelLoader.getLevels())
+				{
+					levelModel.button.enabled = levelModel.enable;
+             	}
+				visible = true;
+			}
+			
+			/**
+			 * creationComplete event listener
+			 * Initialize the level buttons
+			 */
+			private function onCreationComplete():void
+			{
+				for each (var levelModel:LevelModel in LevelLoader.getLevels())
+				{
+					levelModel.enable = levelModel.enable || LevelLoader.isEnable(levelModel.name);
+                    addButton(levelModel);
+             	}
+			}
+			
+			/**
+			 * Create and add a level button
+			 * @param	levelModel
+			 */
+			private function addButton(levelModel:LevelModel):void
+			{
+				function onClick(event:MouseEvent):void
+				{
+					dispatchEvent(new GameEvent(GameEvent.START, levelModel.name));
+				}
+				
+				var button:Button = new Button();
+				button.label = levelModel.code;
+				button.width = 60;
+				button.height = 60;
+				button.focusEnabled = false;
+				button.setStyle("skinClass", Class(GameButtonSkin));
+				button.enabled = levelModel.enable;
+				
+				button.addEventListener(MouseEvent.CLICK, onClick);
+				
+				levelButtonGroup.addElement(button);
+				
+				levelModel.button = button;
+			}
+			
+			[Embed(source="../assets/start_back.gif")]
+			[Bindable]
+			protected var backgroundImage:Class;
+		]]>
+	</fx:Script>
+
+	<s:BitmapImage source="{backgroundImage}"
+				   alpha="0.3"
+				   horizontalCenter="0"
+				   verticalCenter="0"
+				   width="800"
+				   height="600"
+				   scaleMode="letterbox" />
+
+	<s:Label text="Select a level !"
+			 horizontalCenter="0"
+			 verticalCenter="-30" />
+
+	<s:HGroup horizontalCenter="0"
+			  verticalCenter="30"
+			  gap="20"
+			  id="levelButtonGroup">
+	</s:HGroup>
+
+</s:BorderContainer>

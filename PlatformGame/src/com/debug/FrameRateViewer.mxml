@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Label xmlns:fx="http://ns.adobe.com/mxml/2009"
+		 xmlns:s="library://ns.adobe.com/flex/spark"
+		 xmlns:mx="library://ns.adobe.com/flex/halo"
+		 color="red"
+         text="{frameRate}"
+         enterFrame="onEnterFrame()">
+
+	<fx:Script>
+		<![CDATA[
+        	[Bindable]
+			/**
+			 * FrameRateViewer display the application frame rate
+			 * @author mamutdelaunay
+			 */
+			
+			public var frameRate:int;
+            
+            protected function onEnterFrame():void {
+                var currentTimeMs:Number = new Date().time;
+                frameRate = 1000 / (currentTimeMs - previousTimeMs);
+                previousTimeMs = currentTimeMs;
+            }
+            
+            protected var previousTimeMs:Number = new Date().time;
+		]]>
+	</fx:Script>
+
+</s:Label>
